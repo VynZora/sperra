@@ -188,6 +188,7 @@ def admin_dashboard(request):
     stats = {
         'total_appointments': Appointment.objects.count(),
         'inquiries_count': ContactMessage.objects.count(),
+        'treatments_count': Treatments.objects.count(),
     }
     
     contacts_count = ContactMessage.objects.count()
@@ -205,7 +206,7 @@ def admin_dashboard(request):
     applications_labels = [x['month'].strftime('%b') for x in appt_data]
     applications_counts = [x['count'] for x in appt_data]
 
-    test_data = Testimonial.objects.filter(
+    contact_data = ContactMessage.objects.filter(
         created_at__year=current_year
     ).annotate(
         month=TruncMonth('created_at')
@@ -213,8 +214,12 @@ def admin_dashboard(request):
         count=Count('id')
     ).order_by('month')
 
-    testimonials_labels = [x['month'].strftime('%b') for x in test_data]
-    testimonials_counts = [x['count'] for x in test_data]
+    inquiries_labels = [x['month'].strftime('%b') for x in contact_data]
+    inquiries_counts = [x['count'] for x in contact_data]
+
+    # testimonials_labels = [x['month'].strftime('%b') for x in test_data]
+    # testimonials_counts = [x['count'] for x in test_data]
+
 
 
     recent_applications = Appointment.objects.select_related('treatment').order_by('-created_at')[:5]
@@ -230,8 +235,8 @@ def admin_dashboard(request):
         
         'applications_labels': json.dumps(applications_labels),
         'applications_counts': json.dumps(applications_counts),
-        'testimonials_labels': json.dumps(testimonials_labels),
-        'testimonials_counts': json.dumps(testimonials_counts),
+        'inquiries_labels': json.dumps(inquiries_labels),
+        'inquiries_counts': json.dumps(inquiries_counts),
     }
 
     return render(request, "admin_pages/admin-dashboard.html", context)

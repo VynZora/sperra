@@ -16,17 +16,17 @@
             </div>
         </div>
 
-        {% comment %} <div class="stat-card">
+        <div class="stat-card">
             <div class="stat-header">
-                <div class="stat-title">Inquiries</div>
+                <div class="stat-title">Treatments</div>
                 <div class="stat-icon icon-green">
-                    <i class="icon">📩</i>
+                    <i class="icon"></i>
                 </div>
             </div>
-            <div class="stat-value">{{ stats.inquiries_count }}</div>
+            <div class="stat-value">{{ stats.treatments_count }}</div>
             <div class="stat-change">
             </div>
-        </div> {% endcomment %}
+        </div> 
 
         <div class="stat-card">
             <div class="stat-header">
@@ -53,17 +53,17 @@
             </div>
         </div>
 
-        {% comment %} <div class="chart-card">
+         <div class="chart-card">
             <div class="chart-header">
-                <div class="chart-title">Monthly Testimonials</div>
+                <div class="chart-title">Contact Inquiries</div>
                 <div class="chart-actions">
                 </div>
             </div>
             <div class="chart-container">
-                <canvas id="testimonialsChart"></canvas>
+                <canvas id="inquiriesChart"></canvas>
             </div>
         </div>
-    </div> {% endcomment %}
+    </div> 
 
     <div class="data-grid">
 
@@ -146,15 +146,15 @@
         }
     });
 
-    // Testimonials Chart - Connected to View Data
-    var ctx2 = document.getElementById('testimonialsChart').getContext('2d');
-    var testimonialsChart = new Chart(ctx2, {
-        type: 'bar',
+    // Inquiries Chart - Connected to View Data
+    var ctx2 = document.getElementById('inquiriesChart').getContext('2d');
+    var inquiriesChart = new Chart(ctx2, {
+        type: 'polarArea',
         data: {
-            labels: {{ testimonials_labels|safe }},
+            labels: {{ inquiries_labels|safe }},
             datasets: [{
-                label: 'Testimonials',
-                data: {{ testimonials_counts|safe }},
+                label: 'Inquiries',
+                data: {{ inquiries_counts|safe }},
                 backgroundColor: 'rgba(255, 99, 132, 0.6)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
