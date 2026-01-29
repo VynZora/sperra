@@ -408,9 +408,7 @@
                 <div class="col-lg-6">
                     <!-- Google Map Iframe Start -->
                     <div class="google-map-iframe">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96737.10562045308!2d-74.08535042841811!3d40.739265258395164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1703158537552!5m2!1sen!2sin"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15665.970789714673!2d75.98869770095561!3d11.001612190032143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b4a66b9e1243%3A0x57ad4731fa4b1279!2sKottakkal%2C%20Kerala!5e0!3m2!1sen!2sin!4v1769682872386!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <!-- Google Map Iframe End -->
                 </div>
@@ -471,9 +469,9 @@
                         <div class="footer-links quick-links">
                             <h3>quick link</h3>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{% url 'index' %}">Home</a></li>
                                 <li><a href="{% url 'about' %}">About us</a></li>
-                                <li><a href="services.html">services</a></li>
+                                <li><a href="{% url 'treatments' %}">Treatments</a></li>
                                 <li><a href="{% url 'contact' %}">Contact us</a></li>
                             </ul>
                         </div>
@@ -510,7 +508,7 @@
                             <ul>
                                 <li>
                                     <i class="fa-solid fa-envelope"></i>
-                                    <a href="mailto:sperrakottakkal@gmail.com">sperrakottakkal@gmail.com</a>
+                                    <a href="mailto:sperrakottakkal@gmail.com" style="text-transform: none;">sperrakottakkal@gmail.com</a>
                                 </li>
                             </ul>
                         </div>

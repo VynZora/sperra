@@ -186,7 +186,7 @@ def admin_logout(request):
 @login_required(login_url="admin_login")
 def admin_dashboard(request):
     stats = {
-        'applications_count': Appointment.objects.count(),
+        'total_appointments': Appointment.objects.count(),
         'inquiries_count': ContactMessage.objects.count(),
     }
     

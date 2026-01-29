@@ -28,7 +28,7 @@
                 <tr>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
+                    {% comment %} <th scope="col">Email</th> {% endcomment %}
                     <th scope="col">Phone</th>
                     <th scope="col">Treatment</th>
                     <th scope="col">Appointment Date</th>
@@ -41,7 +41,7 @@
                 <tr>
                     <td>{{ inquiry.first_name }}</td>
                     <td>{{ inquiry.last_name }}</td>
-                    <td>{{ inquiry.email }}</td>
+                    {% comment %} <td>{{ inquiry.email }}</td> {% endcomment %}
                     <td>{{ inquiry.phone|default:"-" }}</td>
                     <td class="description-cell" title="{{ inquiry.message }}">
                         {{ inquiry.treatment|truncatewords:10 }}
@@ -49,7 +49,7 @@
 
                     <td>{{ inquiry.appointment_date }}</td>
 
-                    <td>{{ inquiry.created_at|date:"Y-m-d H:i" }}</td>
+                    <td>{{ inquiry.created_at|date:"Y-m-d" }}</td>
                     <td>
                         {% comment %} <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                             data-bs-target="#messageModal{{ inquiry.id }}">
@@ -102,9 +102,9 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p><strong>Email:</strong> {{ inquiry.email }}</p>
+                                {% comment %} <p><strong>Email:</strong> {{ inquiry.email }}</p> {% endcomment %}
                                 {% if inquiry.phone %}<p><strong>Phone:</strong> {{ inquiry.phone }}</p>{% endif %}
-                                <p><strong>Date:</strong> {{ inquiry.created_at|date:"Y-m-d H:i" }}</p>
+                                <p><strong>Date:</strong> {{ inquiry.created_at|date:"Y-m-d " }}</p>
                                 <hr>
                                 <p><strong>Message:</strong></p>
                                 <p>{{ inquiry.message }}</p>

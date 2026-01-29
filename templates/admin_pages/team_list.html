@@ -1,14 +1,14 @@
 {% extends "admin_pages/base.html" %}
 {% load static %}
 
-{% block title %}Team Members List | Admin Dashboard{% endblock %}
+{% block title %}Doctors List | Admin Dashboard{% endblock %}
 
 {% block content %}
 <div class="dashboard__form__wraper">
 
 
     <div class="create__course__title mb-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
-        <h4 class="mb-0">Team Members List</h4>
+        <h4 class="mb-0">Doctors List</h4>
 
         <div class="d-flex align-items-center gap-2 ms-auto">
             <div class="search-box">
@@ -16,7 +16,7 @@
             </div>
 
         </div>
-        <a href="{% url 'team_add' %}" class="btn btn-success btn-sm">Add New Team</a>
+        <a href="{% url 'team_add' %}" class="btn btn-success btn-sm">Add New Doctor</a>
     </div>
 
 

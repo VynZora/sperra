@@ -586,9 +586,9 @@
                         <div class="footer-links quick-links">
                             <h3>quick link</h3>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{% url 'index' %}">Home</a></li>
                                 <li><a href="{% url 'about' %}">About us</a></li>
-                                <li><a href="services.html">services</a></li>
+                                <li><a href="{% url 'treatments' %}">Treatments</a></li>
                                 <li><a href="{% url 'contact' %}">Contact us</a></li>
                             </ul>
                         </div>
@@ -625,7 +625,7 @@
                             <ul>
                                 <li>
                                     <i class="fa-solid fa-envelope"></i>
-                                    <a href="mailto:sperrakottakkal@gmail.com">sperrakottakkal@gmail.com</a>
+                                    <a href="mailto:sperrakottakkal@gmail.com" style="text-transform: none;">sperrakottakkal@gmail.com</a>
                                 </li>
                             </ul>
                         </div>
