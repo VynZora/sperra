@@ -681,9 +681,9 @@ def view_appointments(request):
 
 @login_required(login_url="admin_login")
 def delete_appointment(request, pk):
-    inquiry = get_object_or_404(Appointment, pk=pk)
+    appointment = get_object_or_404(Appointment, pk=pk)
     if request.method == "POST":
-        inquiry.delete()
+        appointment.delete()
         return redirect("view_appointments")  # change to your listing view name
     return redirect("view_appointments")
 

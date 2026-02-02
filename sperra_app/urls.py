@@ -65,11 +65,11 @@ urlpatterns = [
 
     # View Contacts
     path("view-contacts/", views.view_contacts, name="view_contacts"),
-    path("delete/<int:pk>/", views.delete_inquiry, name="delete_inquiry"),
+    path("delete-inquiry/<int:pk>/", views.delete_inquiry, name="delete_inquiry"),
 
     # View Appointments
     path("view-appointments/", views.view_appointments, name="view_appointments"),
-    path("delete/<int:pk>/", views.delete_appointment, name="delete_appointment"),
+    path("delete-appointment/<int:pk>/", views.delete_appointment, name="delete_appointment"),
      
 
 
