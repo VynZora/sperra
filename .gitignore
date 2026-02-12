@@ -33,3 +33,4 @@ venv/
 
 #Others
 certbot/
+.DS_Store
