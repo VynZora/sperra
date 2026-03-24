@@ -10,7 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 from django.utils import timezone
+from django.conf import settings
 import json
+from urllib import parse, request as urllib_request
 
 
 
@@ -108,18 +110,54 @@ def gallery(request):
     return render(request, 'gallery.html',{ "categories": categories,"images": images,})
 
 def contact(request):
+    recaptcha_site_key = getattr(settings, "GOOGLE_RECAPTCHA_SITE_KEY", "")
+    recaptcha_secret_key = getattr(settings, "GOOGLE_RECAPTCHA_SECRET_KEY", "")
+
     if request.method == "POST":
         form = ContactForm(request.POST)
-        if form.is_valid():
+        recaptcha_valid = True
+
+        if recaptcha_site_key and recaptcha_secret_key:
+            recaptcha_token = request.POST.get("g-recaptcha-response", "")
+            recaptcha_valid = False
+
+            if recaptcha_token:
+                payload = {
+                    "secret": recaptcha_secret_key,
+                    "response": recaptcha_token,
+                    "remoteip": request.META.get("REMOTE_ADDR", ""),
+                }
+                encoded_payload = parse.urlencode(payload).encode()
+
+                try:
+                    verify_request = urllib_request.Request(
+                        "https://www.google.com/recaptcha/api/siteverify",
+                        data=encoded_payload,
+                        method="POST",
+                    )
+                    with urllib_request.urlopen(verify_request, timeout=10) as response:
+                        recaptcha_result = json.loads(response.read().decode("utf-8"))
+                        recaptcha_valid = recaptcha_result.get("success", False)
+                except Exception:
+                    recaptcha_valid = False
+
+            if not recaptcha_valid:
+                messages.error(request, "Please verify captcha before submitting.")
+
+        if form.is_valid() and recaptcha_valid:
             form.save()
             messages.success(request, "Your message has been sent successfully!")
             return redirect("contact")
-        else:
+        elif not form.is_valid():
             messages.error(request, "Please fill all required fields correctly.")
     else:
         form = ContactForm()
 
-    return render(request, "contact.html", {"form": form})
+    return render(
+        request,
+        "contact.html",
+        {"form": form, "recaptcha_site_key": recaptcha_site_key},
+    )
 
 def appointment(request):
     treatments = Treatments.objects.all()
@@ -686,5 +724,3 @@ def delete_appointment(request, pk):
         appointment.delete()
         return redirect("view_appointments")  # change to your listing view name
     return redirect("view_appointments")
-
-
